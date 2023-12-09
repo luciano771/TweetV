@@ -2,12 +2,20 @@ import OpenAI from "openai";
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import path from 'path'
+
 
 dotenv.config()
+
+app.use(express.static(path.join(__dirname, 'public')));
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+  
   
 const client = new OpenAI({ apiKey: process.env.KEY_OPENAI});
 async function enviarPrompt(mensaje){
