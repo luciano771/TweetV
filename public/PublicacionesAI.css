@@ -14,12 +14,19 @@
     display: grid; /* Convertimos el contenedor_secundario en un flex container */
     justify-content: center; /* Centra horizontalmente el contenido */
     align-items: center; /* Centra verticalmente el contenido */
+
+
 }
+.contenedor_secundario::-webkit-scrollbar 
+{
+    display: none;
+}
+
 #button1 {
     width: 50%;
     text-align: center; 
     transform: translateX(50%); /* Movimiento horizontal */
-
+    
 }
 
 #mi-div {
@@ -32,8 +39,14 @@
     margin: 20px;
     padding: 20px;
     width: 700px;
+    overflow: auto;
+    max-width: 800px; /* Limita el ancho máximo al 100% del contenedor secundario */
+    max-height: 400px; /* Limita la altura máxima al 100% del contenedor secundario */
 }
-
+#mi-div::-webkit-scrollbar 
+{
+    display: none;
+}
 .item {
     /* background-color: white; */
     border: 1px solid #ddd;
