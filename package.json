@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "description": "side project",
   "main": "index.js",
+  "repository": "https://github.com/luciano771/TweetV.git",
+  "author": "luciano771 <79546157+luciano771@users.noreply.github.com>",
+  "license": "MIT",
+  "private": false,
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
-  "author": "Luciano pereyra",
-  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "node": "^21.2.0",
     "openai": "^4.20.1"
   }
 }

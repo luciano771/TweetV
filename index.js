@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
   
-const client = new OpenAI({ apiKey: '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' });
+const client = new OpenAI({ apiKey: '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' });
 async function enviarPrompt(mensaje){
 
     const completion = await client.chat.completions.create({
@@ -21,7 +21,7 @@ async function enviarPrompt(mensaje){
 }
  
 
-
+ 
  
 app.post('/publicacion', async (req, res) => {
     const publicacionGET = req.body.mensaje;
@@ -35,8 +35,11 @@ app.post('/publicacion', async (req, res) => {
         const respuestaObjeto = JSON.parse(respuesta);
         res.json(respuestaObjeto);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Error al procesar la solicitud' });
     }
 });
  
+app.listen(3000,()=>{console.log("Listen on port 3000")})
+
 export default app;
