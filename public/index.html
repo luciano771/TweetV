@@ -143,7 +143,7 @@
           console.log(modal.style.display); // Verifica el estado de visualización del modal
           if (event.key === 'Enter' && modal.style.display === 'block') {
               console.log('Llamando a Versionar');
-              Versionar(mensaje);
+              toggleModal();
           }
       });
 
