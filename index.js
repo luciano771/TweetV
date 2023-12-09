@@ -15,6 +15,7 @@ async function enviarPrompt(mensaje){
     const completion = await client.chat.completions.create({
         messages: [{ role: "system", content: mensaje }],
         model: "gpt-3.5-turbo",
+        temperature: 0.9
     });
 
     return completion.choices[0].message.content;
@@ -26,11 +27,17 @@ async function enviarPrompt(mensaje){
  
 app.post('/publicacion', async (req, res) => {
     const publicacionGET = req.body.mensaje;
-    const mensaje = `Quiero publicar contenido en Twitter, esta es mi publicacion: '${publicacionGET}'
-    Quiero que mejores mi publicacion, tene en cuenta que la audiencia es de Argentina
-    Necesito que todos los ejemplos sean distintos y creativos, siempre usando emoticones
-    Dame 6 ejemplos dentro de un json en texto
-    { 1:{publicacion}, 2:{publicacion},... }`;
+    const mensaje = `Estoy a punto de compartir una publicación en mis redes sociales con el siguiente contenido: '${publicacionGET}'.
+    Quiero mejorar el tono y la creatividad de esta publicación considerando la audiencia, principalmente de Argentina.
+    Necesito 6 ejemplos únicos y creativos, cada uno con su propio estilo y emojis para conectar de manera efectiva con la audiencia.
+    Podes usar hashtags, etiquedas y todos los recursos nesesarios para hacer que el contenido sea creativo
+    Por favor, proporciona el texto en formato JSON como se muestra a continuación. Es crucial mantener la misma estructura del JSON, cambiando únicamente el contenido de las publicaciones:
+    {
+    "1": "publicación 1",
+    "2": "publicación 2",
+    ...
+    }`;
+
     try {
         const respuesta = await enviarPrompt(mensaje);
         const respuestaObjeto = JSON.parse(respuesta);
