@@ -23,7 +23,7 @@ async function enviarPrompt(mensaje){
 
 
  
-app.post('/', async (req, res) => {
+app.post('/publicacion', async (req, res) => {
     const publicacionGET = req.body.mensaje;
     const mensaje = `Quiero publicar contenido en Twitter, esta es mi publicacion: '${publicacionGET}'
     Quiero que mejores mi publicacion, tene en cuenta que la audiencia es de Argentina
