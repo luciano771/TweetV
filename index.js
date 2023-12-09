@@ -38,7 +38,7 @@ app.post('/publicacion', async (req, res) => {
     const publicacionGET = req.body.mensaje;
     const mensaje = `Estoy a punto de compartir una publicación en mis redes sociales con el siguiente contenido: '${publicacionGET}'.
     Quiero mejorar el tono y la creatividad de esta publicación considerando la audiencia, principalmente de Argentina.
-    Necesito 6 ejemplos únicos y creativos, cada uno con su propio estilo y emojis para conectar de manera efectiva con la audiencia.
+    Necesito 4 ejemplos únicos y creativos, cada uno con su propio estilo y emojis para conectar de manera efectiva con la audiencia.
     Podes usar hashtags, etiquedas y todos los recursos nesesarios para hacer que el contenido sea creativo
     Por favor, proporciona el texto en formato JSON como se muestra a continuación. Es crucial mantener la misma estructura del JSON, cambiando únicamente el contenido de las publicaciones:
     {
