@@ -38,10 +38,5 @@ app.post('/publicacion', async (req, res) => {
         res.status(500).json({ error: 'Error al procesar la solicitud' });
     }
 });
-app.listen(85, () => {
-    console.log(`Servidor corriendo en el puerto ${85}`);
-  });
-
-
-  
+ 
 export default app;
