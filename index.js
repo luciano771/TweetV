@@ -7,9 +7,10 @@ import path from 'path'
 
 dotenv.config()
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 const app = express();
-app.use(cors());
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, 'public')));app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
