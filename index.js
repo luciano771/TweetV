@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
   
-const client = new OpenAI({ apiKey: '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' });
+const client = new OpenAI({ apiKey: process.env.KEY_OPENAI});
 async function enviarPrompt(mensaje){
 
     const completion = await client.chat.completions.create({
