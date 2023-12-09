@@ -1,0 +1,51 @@
+.contenedor_principal {
+    /* background-color: rgb(209, 201, 191); */
+    width: 100%; /* Ancho del viewport */
+    height: 100%; /* Alto del viewport */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+      /* Movimiento vertical */
+}
+.contenedor_secundario{
+    /* background-color: azure; */
+    margin: 20px;
+    display: grid; /* Convertimos el contenedor_secundario en un flex container */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+#button1 {
+    width: 50%;
+    text-align: center; 
+    transform: translateX(50%); /* Movimiento horizontal */
+
+}
+
+#mi-div {
+    /* background-color: aliceblue; */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);  
+    gap: 10px;
+    margin: 20px;
+    padding: 20px;
+    width: 700px;
+}
+
+.item {
+    /* background-color: white; */
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s; /* Ajuste del tiempo de transición */
+     
+}
+
+.item:hover {
+    transform: scale(1.05);
+}
+ 

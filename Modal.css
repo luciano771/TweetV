@@ -1,0 +1,32 @@
+/* Estilos del modal */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+.modal-content {
+    background-color: #fefefe;
+    display: grid;
+    gap: 20px;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 30%;
+     
+}
+button {
+    width: 50%;
+    text-align: center; 
+  
+
+}
+ 
+ 
