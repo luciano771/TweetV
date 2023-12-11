@@ -197,6 +197,8 @@ itemsContainer.addEventListener('click', async function(event) {
 
 
        function share(contenido,access_token){
+        document.getElementById('contenededor-spinner').style.display = 'block';
+
         const cookies = document.cookie;
           if(!access_token){
             window.location.href = 'https://tweetv.onrender.com/linkedin';
@@ -214,10 +216,14 @@ itemsContainer.addEventListener('click', async function(event) {
           .then(response => response.json())
           .then(data => {
             console.log(data);
+            document.getElementById('contenededor-spinner').style.display = 'none';
+
             
           })
           .catch(error => {
             console.error('Error:', error);
+            document.getElementById('contenededor-spinner').style.display = 'none';
+
           });
       }
 
