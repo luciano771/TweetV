@@ -214,10 +214,7 @@ itemsContainer.addEventListener('click', async function(event) {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            const { id } = data; 
-            const partes = id.split(':');
-            const numero = partes[3];
-            window.open("https://www.linkedin.com/in/lucianopereyra/recent-activity/all/" + numero, '_blank');
+            
           })
           .catch(error => {
             console.error('Error:', error);
