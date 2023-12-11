@@ -38,6 +38,7 @@ linkedinRoutes.get('/callback', async (req, res) => {
         })
 
         res.json(access_token);
+        res.redirect("https://tweetv.onrender.com");
     } catch (error) {
         console.error(error);
         res.status(500).send('Error en la autenticación con LinkedIn');
