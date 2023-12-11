@@ -50,6 +50,9 @@
 }
 .item {
     /* background-color: white; */
+    display: grid;
+    gap:5px;
+    text-align: center;
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
@@ -62,7 +65,27 @@
 .item:hover {
     transform: scale(1.05);
 }
- 
+
+
+
+.item img {
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Para centrar la imagen dentro del div */
+}
+
+.item button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
  
 #contenededor-spinner{
     display: none;

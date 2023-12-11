@@ -48,8 +48,8 @@ linkedinRoutes.post('/share', async (req, res) => {
     try {
         const mensaje = req.body.mensaje;
         const cookie = req.cookies;
-        const idShare = await linkedincontroller.share(cookie.accesstokenlinkedin,mensaje,cookie.sub)
         console.log(cookie.sub,cookie.accesstokenlinkedin,mensaje);
+        const idShare = await linkedincontroller.share(cookie.accesstokenlinkedin,mensaje,cookie.sub)
         console.log(idShare);
         res.send(idShare);
     } catch (error) {

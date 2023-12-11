@@ -53,10 +53,10 @@
         <div id="contenededor-spinner"><div id="posicion-spinner"><div id="spinner"></div></div></div>
           <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">En que estas pensando? &#128584;</button>
           <div id="mi-div">
-            <div class = "item" id="1">Hoy amanecí como 🌧️ en Buenos Aires... Nublado sin ganas de salir de la cama ☁️😴 ¿Alguien más quiere hacer el día más interesante? #DomingoNoSéQuéHacer</div>
-            <div class = "item"id="2">¡Hola Argentina! ¿Alguien más se encuentra en modo indecisión hoy? 🤔 No sé si quedarme en casa y ver una peli o explorar nuevos lugares 🎬🌆 ¡Ayudenme con sus recomendaciones! #DomingoIndeciso</div>
-            <div class = "item"id="3">Muy buen día, mi gente hermosa de Argentina! 😄 Hoy estoy como un ☕️ sin azúcar... sin idea de qué hacer. ¿Me tiran alguna sugerencia? ¡Los leo! #DomingoSinPlan</div>
-            <div class = "item"id="4">¡Hola, argentinos y argentinas! 🇦🇷 Hoy me siento como un carrito 🛒 sin rumbo en un supermercado gigante 🛒 ¿Alguien quiere ser mi compañero(a) de aventuras y ayudarme a encontrar algo emocionante para hacer? 💃🎉 ¡Etiqueten a sus amigos y pongan el hashtag #DomingoIndeciso!</div>
+            <div class = "item" id="1">Hoy amanecí como 🌧️ en Buenos Aires... Nublado sin ganas de salir de la cama ☁️😴 ¿Alguien más quiere hacer el día más interesante? #DomingoNoSéQuéHacer<button class="share"><img src="./img/share.png"></button></div>
+            <div class = "item"id="2">¡Hola Argentina! ¿Alguien más se encuentra en modo indecisión hoy? 🤔 No sé si quedarme en casa y ver una peli o explorar nuevos lugares 🎬🌆 ¡Ayudenme con sus recomendaciones! #DomingoIndeciso<button class="share"><img src="./img/share.png"></button></div>
+            <div class = "item"id="3">Muy buen día, mi gente hermosa de Argentina! 😄 Hoy estoy como un ☕️ sin azúcar... sin idea de qué hacer. ¿Me tiran alguna sugerencia? ¡Los leo! #DomingoSinPlan<button class="share"><img src="./img/share.png"></button></div>
+            <div class = "item"id="4">¡Hola, argentinos y argentinas! 🇦🇷 Hoy me siento como un carrito 🛒 sin rumbo en un supermercado gigante 🛒 ¿Alguien quiere ser mi compañero(a) de aventuras y ayudarme a encontrar algo emocionante para hacer? 💃🎉 ¡Etiqueten a sus amigos y pongan el hashtag #DomingoIndeciso!<button class="share"><img src="./img/share.png"></button></div>
           </div>
       </div>
   </div>
@@ -64,14 +64,14 @@
   <script>
   
     
-  function Versionar(mensaje) {
+  async function Versionar(mensaje) {
   document.getElementById('contenededor-spinner').style.display = 'block';
   var url = "https://tweetv.onrender.com/openai";
   var data = { mensaje: mensaje };
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 60000);
 
-  fetch(url, {
+  await fetch(url, {
     signal: controller.signal,
     method: "POST",
     body: JSON.stringify(data),
@@ -89,23 +89,23 @@
         const ultimoElemento = items[items.length - 1];
         ultimoID = parseInt(ultimoElemento.id);
       
-          if (data.hasOwnProperty(key)) {
-            const bannerDiv = document.createElement('div');
-            bannerDiv.className = 'item';
-            bannerDiv.id = ultimoID + 1;
-            bannerDiv.innerHTML = data[key];
-            const bannerContainer = document.getElementById('mi-div');
-            bannerContainer.appendChild(bannerDiv);
+        if (data.hasOwnProperty(key)) {
+          const bannerDiv = document.createElement('div');
+          bannerDiv.className = 'item';
+          bannerDiv.id = ultimoID + 1;
+ 
+          const textoElemento = document.createTextNode(data[key]);
+          bannerDiv.appendChild(textoElemento);
+
+          const shareButton = document.createElement('button');
+          shareButton.className = 'share'; // Utilizamos una clase en lugar de un ID
+          shareButton.innerHTML = '<img src="./img/share.png">';
+          bannerDiv.appendChild(shareButton);
+          
+          const bannerContainer = document.getElementById('mi-div');
+          bannerContainer.appendChild(bannerDiv);
           }
         }
-
-        const nuevosItems = document.querySelectorAll('.item');
-      nuevosItems.forEach(item => {
-        item.addEventListener('click', function(event) {
-          console.log(event.target.innerHTML);
-          console.log(event.target.id);
-        });
-      });
 
       })
     .catch(error => {
@@ -139,8 +139,8 @@
       window.onclick = function(event) {
           var modal = document.getElementById('myModal');
           if (event.target == modal) {
-              modal.style.display = 'none';
-              localStorage.setItem('modalOpened', 'false');
+            modal.style.display = 'none';
+            localStorage.setItem('modalOpened', 'false');
           }
       }
     
@@ -154,18 +154,76 @@
               toggleModal();
           }
       });
-
-
-     
  
-        const items = document.querySelectorAll('.item');
-        items.forEach(item => {
-          item.addEventListener('click', function(event) {
-            console.log(event.target.innerHTML);
-            console.log(event.target.id);
-          });
-        });
+const itemsContainer = document.getElementById('mi-div');
+
+itemsContainer.addEventListener('click', async function(event) {
+    if (event.target.tagName === 'IMG' && event.target.parentElement.classList.contains('share')) {
+        const textoDiv = event.target.parentElement.parentElement.textContent.trim();
+        console.log(textoDiv);
+
+        const access_token = await cookie();
+        share(textoDiv, access_token);
+    }
+});
+
+
+
       
+      async function cookie(){
+          let access_token = "";
+          const url = "https://tweetv.onrender.com/linkedin/cookie"
+          await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            access_token = data.accesstokenlinkedin;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            
+          });
+
+          return access_token;
+          
+      }
+
+
+
+
+       function share(contenido,access_token){
+        const cookies = document.cookie;
+          if(!access_token){
+            window.location.href = 'https://tweetv.onrender.com//linkedin';
+            return
+          }
+          const mensaje = { "mensaje":  contenido };
+
+          fetch('https://tweetv.onrender.com/linkedin/share', {
+          method: "POST",
+          body: JSON.stringify(mensaje),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            const { id } = data; 
+            const partes = id.split(':');
+            const numero = partes[3];
+            window.open("https://www.linkedin.com/in/lucianopereyra/recent-activity/all/" + numero, '_blank');
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+
 
   
      
