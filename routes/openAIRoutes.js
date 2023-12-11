@@ -1,40 +1,13 @@
-import OpenAI from "openai";
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv'
-import path from 'path'
+// openAIRoutes.js
+
+import express from 'express'
+import  openAIController  from '../controllers/openAIController.js';
+import  linkedinController  from '../controllers/linkedinController.js';
 
 
-dotenv.config()
-
-
-const app = express();
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'public')));app.use(cors());
-app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
-  
-  
-const client = new OpenAI({ apiKey: process.env.KEY_OPENAI});
-async function enviarPrompt(mensaje){
-
-    const completion = await client.chat.completions.create({
-        messages: [{ role: "system", content: mensaje }],
-        model: "gpt-3.5-turbo",
-        temperature: 0.9
-    });
-
-    return completion.choices[0].message.content;
-    
-}
- 
-
- 
- 
-app.post('/publicacion', async (req, res) => {
+const openAIRoutes = express.Router();
+const openaicontrollers = new openAIController(); 
+openAIRoutes.post('/', async (req, res) => {
     const publicacionGET = req.body.mensaje;
     const mensaje = `Estoy a punto de compartir una publicación en mis redes sociales con el siguiente contenido: '${publicacionGET}'.
     Quiero mejorar el tono y la creatividad de esta publicación considerando la audiencia, principalmente de Argentina.
@@ -48,17 +21,16 @@ app.post('/publicacion', async (req, res) => {
     }`;
 
     try {
-        const respuesta = await enviarPrompt(mensaje);
+        const respuesta = await openaicontrollers.enviarPrompt(mensaje);
         const respuestaObjeto = JSON.parse(respuesta);
         res.json(respuestaObjeto);
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({ error: 'Error al procesar la solicitud' });
     }
 });
 
-const PORT = process.env.PORT
+export default openAIRoutes;
 
-app.listen(PORT,()=>{console.log("Escuchando en puerto: "+PORT)})
 
-export default app;
+ 
