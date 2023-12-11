@@ -37,7 +37,7 @@ linkedinRoutes.get('/callback', async (req, res) => {
             sameSite: 'lax'
         })
         console.log(access_token)
-        res.redirect("https://tweetv.onrender.com"); // pagina principal
+        res.redirect("https://tweetv.onrender.com/linkedin/user"); // pagina principal
     } catch (error) {
         console.error(error);
         res.status(500).send('Error en la autenticación con LinkedIn');
@@ -90,7 +90,8 @@ linkedinRoutes.get('/user', async (req, res) => {
             sameSite: 'lax'
         })
 
-        res.send(user);
+        console.log(user);
+        res.redirect("https://tweetv.onrender.com"); // pagina principal
     } catch (error) {
         console.error(error);
         res.status(500).send('Error en la autenticación con LinkedIn');
