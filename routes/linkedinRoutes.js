@@ -12,8 +12,7 @@ const linkedincontroller = new linkedinController();
 
 
 // link de produccion 
-const linkedinAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=7769lq0gs6nd95&redirect_uri=https://tweetv.onrender.com/linkedin/callback
-&state=random_state&scope=openid%20profile%20w_member_social`;
+const linkedinAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=7769lq0gs6nd95&redirect_uri=https://tweetv.onrender.com/linkedin/callback&state=random_state&scope=openid%20profile%20w_member_social`;
 
 
 // Ruta para iniciar la autenticación con LinkedIn
