@@ -1,6 +1,9 @@
 import fetch from 'node-fetch';
 export default class linkedinController {
- 
+// recordar cambiar las url en prod y desarrollo: 
+//http://localhost:3000/linkedin/callback desarrollo
+//https://tweetv.onrender.com/linkedin/callback produccion
+
     async codeAToken(code){    
         try {
             // Intercambio de código por token de acceso con LinkedIn
@@ -8,7 +11,7 @@ export default class linkedinController {
             const params = new URLSearchParams({
             grant_type: 'authorization_code',
             code,
-            redirect_uri: 'http://localhost:3000/linkedin/callback',
+            redirect_uri: 'https://tweetv.onrender.com/linkedin/callback',
             client_id: '7769lq0gs6nd95',
             client_secret: 'bvcDXeKGO1P8L4vV'
             });
