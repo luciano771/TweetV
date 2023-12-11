@@ -35,13 +35,13 @@
                   x-init="resize()"
                   @input="resize()"
                   type="text"
-                  placeholder="mmmmm 🤔 🙈 ..."
+                  placeholder="Ingresa tu publicacion..."
                   class="flex w-full h-auto min-h-[150px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
                   ></textarea>
                   </div>
                 <!---text area-->
                 <br> 
-                <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> versionar &#128586;</button>
+                <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generar versiones</button>
             </div>           
         </div>
       </div>
@@ -84,18 +84,29 @@
 
         <!--alerta-->
         <div id="contenededor-spinner"><div id="posicion-spinner"><div id="spinner"></div></div></div>
-          <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">En que estas pensando? &#128584;</button>
+          <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ingresa tu publicacion</button>
           <div id="mi-div">
-            <div class = "item" id="1">Hoy amanecí como 🌧️ en Buenos Aires... Nublado sin ganas de salir de la cama ☁️😴 ¿Alguien más quiere hacer el día más interesante? #DomingoNoSéQuéHacer<button class="share"><img src="./img/share.png"></button></div>
-            <div class = "item"id="2">¡Hola Argentina! ¿Alguien más se encuentra en modo indecisión hoy? 🤔 No sé si quedarme en casa y ver una peli o explorar nuevos lugares 🎬🌆 ¡Ayudenme con sus recomendaciones! #DomingoIndeciso<button class="share"><img src="./img/share.png"></button></div>
-            <div class = "item"id="3">Muy buen día, mi gente hermosa de Argentina! 😄 Hoy estoy como un ☕️ sin azúcar... sin idea de qué hacer. ¿Me tiran alguna sugerencia? ¡Los leo! #DomingoSinPlan<button class="share"><img src="./img/share.png"></button></div>
-            <div class = "item"id="4">¡Hola, argentinos y argentinas! 🇦🇷 Hoy me siento como un carrito 🛒 sin rumbo en un supermercado gigante 🛒 ¿Alguien quiere ser mi compañero(a) de aventuras y ayudarme a encontrar algo emocionante para hacer? 💃🎉 ¡Etiqueten a sus amigos y pongan el hashtag #DomingoIndeciso!<button class="share"><img src="./img/share.png"></button></div>
+            <div class="item" id="1">
+              <p>¡Inmerso en el mundo de la programación esta mañana! 🖥️💻 Completé un proyecto interesante en JavaScript, ¿alguien más trabajando en algo emocionante hoy? #DesarrolloDeSoftware</p>
+              <button class="share"><img src="./img/share.png" alt="Compartir en LinkedIn"></button>
           </div>
+          <div class="item" id="2">
+              <p>¡Hola a todos! Hoy estoy explorando nuevos conceptos de inteligencia artificial. 🤖 ¿Alguien tiene recomendaciones para cursos o recursos sobre aprendizaje automático? #AI #AprendizajeAutomático</p>
+              <button class="share"><img src="./img/share.png" alt="Compartir en LinkedIn"></button>
+          </div>
+          <div class="item" id="3">
+              <p>¡Buen día, colegas desarrolladores! 💡 Descubrí un truco nuevo en Python que me ahorró mucho tiempo en mi proyecto actual. ¿Alguien quiere conocerlo? #Python #Programación</p>
+              <button class="share"><img src="./img/share.png" alt="Compartir en LinkedIn"></button>
+          </div>
+          <div class="item" id="4">
+              <p>¡Saludos a la comunidad de desarrolladores! 🌟 Trabajando en un desafío de codificación esta tarde, ¿alguien más disfruta de los retos de programación? #DesarrolloWeb #Challenge</p>
+              <button class="share"><img src="./img/share.png" alt="Compartir en LinkedIn"></button>
+          </div></div>
       </div>
   </div>
   
   <script>
-    
+
  document.getElementById('myAlert').style.display="none";
   async function Versionar(mensaje) {
   document.getElementById('contenededor-spinner').style.display = 'block';
