@@ -1,8 +1,7 @@
  
-import cookieParser from 'cookie-parser';
 import express from 'express'
 import linkedinController from '../controllers/linkedinController.js';
-import { Cookie } from 'express-session';
+
 
 
 const linkedinRoutes = express.Router();
