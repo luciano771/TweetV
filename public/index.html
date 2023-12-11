@@ -53,10 +53,10 @@
         <div id="contenededor-spinner"><div id="posicion-spinner"><div id="spinner"></div></div></div>
           <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">En que estas pensando? &#128584;</button>
           <div id="mi-div">
-            <div class = "item">Hoy amanecí como 🌧️ en Buenos Aires... Nublado sin ganas de salir de la cama ☁️😴 ¿Alguien más quiere hacer el día más interesante? #DomingoNoSéQuéHacer</div>
-            <div class = "item">¡Hola Argentina! ¿Alguien más se encuentra en modo indecisión hoy? 🤔 No sé si quedarme en casa y ver una peli o explorar nuevos lugares 🎬🌆 ¡Ayudenme con sus recomendaciones! #DomingoIndeciso</div>
-            <div class = "item">Muy buen día, mi gente hermosa de Argentina! 😄 Hoy estoy como un ☕️ sin azúcar... sin idea de qué hacer. ¿Me tiran alguna sugerencia? ¡Los leo! #DomingoSinPlan</div>
-            <div class = "item">¡Hola, argentinos y argentinas! 🇦🇷 Hoy me siento como un carrito 🛒 sin rumbo en un supermercado gigante 🛒 ¿Alguien quiere ser mi compañero(a) de aventuras y ayudarme a encontrar algo emocionante para hacer? 💃🎉 ¡Etiqueten a sus amigos y pongan el hashtag #DomingoIndeciso!</div>
+            <div class = "item" id="1">Hoy amanecí como 🌧️ en Buenos Aires... Nublado sin ganas de salir de la cama ☁️😴 ¿Alguien más quiere hacer el día más interesante? #DomingoNoSéQuéHacer</div>
+            <div class = "item"id="2">¡Hola Argentina! ¿Alguien más se encuentra en modo indecisión hoy? 🤔 No sé si quedarme en casa y ver una peli o explorar nuevos lugares 🎬🌆 ¡Ayudenme con sus recomendaciones! #DomingoIndeciso</div>
+            <div class = "item"id="3">Muy buen día, mi gente hermosa de Argentina! 😄 Hoy estoy como un ☕️ sin azúcar... sin idea de qué hacer. ¿Me tiran alguna sugerencia? ¡Los leo! #DomingoSinPlan</div>
+            <div class = "item"id="4">¡Hola, argentinos y argentinas! 🇦🇷 Hoy me siento como un carrito 🛒 sin rumbo en un supermercado gigante 🛒 ¿Alguien quiere ser mi compañero(a) de aventuras y ayudarme a encontrar algo emocionante para hacer? 💃🎉 ¡Etiqueten a sus amigos y pongan el hashtag #DomingoIndeciso!</div>
           </div>
       </div>
   </div>
@@ -64,48 +64,56 @@
   <script>
   
     
-    function Versionar(mensaje) {
-      // Muestra un indicador de espera aquí (spinner, animación, etc.)
-      // Por ejemplo, muestra un spinner en un div con el ID 'spinner'
-      document.getElementById('contenededor-spinner').style.display = 'block';
+  function Versionar(mensaje) {
+  document.getElementById('contenededor-spinner').style.display = 'block';
+  var url = "https://tweetv.onrender.com/openai";
+  var data = { mensaje: mensaje };
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 60000);
+
+  fetch(url, {
+    signal: controller.signal,
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('contenededor-spinner').style.display = 'none';
+       
     
-      var url = "https://tweetv.onrender.com/openai";
-      var data = { mensaje: mensaje };
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000); // Establece un tiempo de espera de 10 segundos (10000 milisegundos)
-    
-    
-      fetch(url,{
-        signal: controller.signal,
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Elimina el indicador de espera una vez que se recibe la respuesta
-        document.getElementById('contenededor-spinner').style.display = 'none';
-    
-        for (const key in data) {
+      for (const key in data) {
+        const items = document.querySelectorAll('.item');
+        const ultimoElemento = items[items.length - 1];
+        ultimoID = parseInt(ultimoElemento.id);
+      
           if (data.hasOwnProperty(key)) {
             const bannerDiv = document.createElement('div');
-            bannerDiv.className = 'item'
+            bannerDiv.className = 'item';
+            bannerDiv.id = ultimoID + 1;
             bannerDiv.innerHTML = data[key];
             const bannerContainer = document.getElementById('mi-div');
             bannerContainer.appendChild(bannerDiv);
           }
         }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // En caso de error, también elimina el indicador de espera
-        document.getElementById('contenededor-spinner').style.display = 'none';
+
+        const nuevosItems = document.querySelectorAll('.item');
+      nuevosItems.forEach(item => {
+        item.addEventListener('click', function(event) {
+          console.log(event.target.innerHTML);
+          console.log(event.target.id);
+        });
       });
-    }
-     
-    
+
+      })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('contenededor-spinner').style.display = 'none';
+    });
+}
+
     
     
       document.addEventListener('DOMContentLoaded', function() {
@@ -136,20 +144,30 @@
           }
       }
     
-      document.addEventListener('keydown', function(event) {
+         document.addEventListener('keydown', function(event) {
           var mensaje = document.getElementById('inp').value.trim();
           var modal = document.getElementById('myModal');
-          console.log(event.key); // Verifica la tecla presionada
-          console.log(modal.style.display); // Verifica el estado de visualización del modal
+          // console.log(event.key); // Verifica la tecla presionada
+          // console.log(modal.style.display); // Verifica el estado de visualización del modal
           if (event.key === 'Enter' && modal.style.display === 'block') {
               console.log('Llamando a Versionar');
               toggleModal();
           }
       });
 
-    
-    
-    
+
+     
+ 
+        const items = document.querySelectorAll('.item');
+        items.forEach(item => {
+          item.addEventListener('click', function(event) {
+            console.log(event.target.innerHTML);
+            console.log(event.target.id);
+          });
+        });
+      
+
+  
      
     
         </script>
