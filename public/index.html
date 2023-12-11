@@ -18,8 +18,7 @@
  </head>
   <body>
     <!-- Contenedores donde se crearán los divs -->
-    <div class="contenedor_principal">
-
+    <div class="contenedor_principal"> 
       <!--Modal--->  
       <div id="myModal" class="modal">
         <div class="modal-content">
@@ -50,6 +49,40 @@
       <!--Modal--->
  
       <div class="contenedor_secundario"> 
+        <!--alerta-->
+        <div
+  role="alert"
+  class="relative flex w-full px-4 py-4 text-base text-white bg-blue-700 rounded-lg font-regular"
+  data-dismissible="alert"
+  id="myAlert" 
+>
+  <div class="mr-12">Se ha publicado en linkedin.</div>
+  <button
+    data-dismissible-target="alert"
+    class="!absolute top-3 right-3 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-white transition-all hover:bg-white/10 active:bg-white/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+    type="button"
+    id="toggleButton"  
+  >
+    <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        class="w-6 h-6"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        ></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
+        <!--alerta-->
         <div id="contenededor-spinner"><div id="posicion-spinner"><div id="spinner"></div></div></div>
           <button id="button1"onclick="toggleModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">En que estas pensando? &#128584;</button>
           <div id="mi-div">
@@ -62,7 +95,8 @@
   </div>
   
   <script>
-  
+const alertDiv = document.getElementById('myAlert');
+alertDiv.style.display = 'none';
     
   async function Versionar(mensaje) {
   document.getElementById('contenededor-spinner').style.display = 'block';
@@ -198,6 +232,7 @@ itemsContainer.addEventListener('click', async function(event) {
 
        function share(contenido,access_token){
         document.getElementById('contenededor-spinner').style.display = 'block';
+        const alertDiv = document.getElementById('myAlert');
 
         const cookies = document.cookie;
           if(!access_token){
@@ -217,13 +252,13 @@ itemsContainer.addEventListener('click', async function(event) {
           .then(data => {
             console.log(data);
             document.getElementById('contenededor-spinner').style.display = 'none';
-
+            alertDiv.style.display = 'block';
             
           })
           .catch(error => {
             console.error('Error:', error);
             document.getElementById('contenededor-spinner').style.display = 'none';
-
+            alertDiv.style.display = 'none';
           });
       }
 
@@ -232,6 +267,11 @@ itemsContainer.addEventListener('click', async function(event) {
      
     
         </script>
+        <!-- from node_modules -->
+<script src="node_modules/@material-tailwind/html@latest/scripts/dismissible.js"></script>
+ 
+<!-- from cdn -->
+<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dismissible.js"></script>
 </body>
 </html>
  

@@ -36,8 +36,7 @@ linkedinRoutes.get('/callback', async (req, res) => {
             secure: true,
             sameSite: 'lax'
         })
-
-        res.json(access_token);
+        console.log(access_token)
         res.redirect("https://tweetv.onrender.com"); // pagina principal
     } catch (error) {
         console.error(error);
